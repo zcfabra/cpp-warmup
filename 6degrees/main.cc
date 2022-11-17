@@ -20,9 +20,21 @@ int main(){
 
 
     void* start_of_data =   mmap(0, stats.st_size, PROT_READ, MAP_SHARED, fd, 0);
-    
-    std::cout<<*((int*)(start_of_data)+1)<<std::endl;
 
+    int first_name_offset = *((int* ) start_of_data + 1);
+    std::cout<<first_name_offset<<std::endl;
 
+    char* first_char_ptr = ((char * ) start_of_data + first_name_offset);
+    char first_char = *first_char_ptr;
+    // std::cout<<first_char<<std::endl;
+    char current_char = first_char;
+    char* current_char_ptr = first_char_ptr;
+    while (current_char != '\0'){
+        std::cout<<current_char;
+        current_char_ptr++;
+        current_char = *current_char_ptr;
+    };
+    std::cout<<""<<std::endl;
 };
+
 
